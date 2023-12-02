@@ -32,8 +32,11 @@ public class TestFactory {
 
     @BeforeClass
     protected void setupDriver(){
+        if ("pc_chrome".equals(this.platform)) {
+            this.webdriver = new ChromeDriver(this.setupChromeOptions());
+            this.webdriver.get("https://www.naver.com");
+        }
 
-        this.webdriver = new ChromeDriver(this.setupChromeOptions());
     }
 
     @AfterClass
@@ -50,5 +53,13 @@ public class TestFactory {
         options.addArguments("--incognito");
 
         return options;
+    }
+
+    protected void usingSleep(long time) {
+        try {
+            Thread.sleep(time);
+        }catch (InterruptedException e)  {
+            e.printStackTrace();
+        }
     }
 }
