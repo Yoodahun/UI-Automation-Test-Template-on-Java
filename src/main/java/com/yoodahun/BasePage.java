@@ -24,6 +24,11 @@ public class BasePage {
         this.actions = new Actions(driver);
     }
 
+    /**
+     * wait를 사용하여 element가 보이는지를 식별합니다.
+     * @param element WebElement
+     * @return WebElement
+     */
     private WebElement usingWait(WebElement element) {
         return this.wait.until(ExpectedConditions.visibilityOf(element));
     }
