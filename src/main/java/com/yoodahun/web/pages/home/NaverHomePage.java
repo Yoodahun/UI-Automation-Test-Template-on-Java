@@ -19,12 +19,13 @@ public class NaverHomePage extends WebBasePage {
     }
 
     public boolean checkShortcutAreaIsVisible() {
-        System.out.println(shortcutArea);
+        logger.info(shortcutArea);
 
         return shortcutArea.isDisplayed();
     }
 
     public void searchText(String text) {
+        logger.info("searchText");
         queryInput.click();
         queryInput.sendKeys(text);
 

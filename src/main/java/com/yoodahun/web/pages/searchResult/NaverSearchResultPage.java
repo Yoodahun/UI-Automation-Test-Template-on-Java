@@ -17,7 +17,7 @@ public class NaverSearchResultPage extends WebBasePage {
     }
 
     public boolean checkQueryArea(String text) {
-        System.out.println(queryInputInSearchResultPage.getAttribute("value"));
+        logger.info(queryInputInSearchResultPage.getAttribute("value"));
         return isElementVisible(queryInputInSearchResultPage) && queryInputInSearchResultPage.getAttribute("value").equals(text);
     }
 
