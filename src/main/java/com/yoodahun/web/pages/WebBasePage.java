@@ -11,6 +11,8 @@ public class WebBasePage extends BasePage {
     }
 
     public void pressEnter() {
+
+        logger.error("pressEnter()");
         this.actions.sendKeys(Keys.RETURN).perform();
     }
 }
