@@ -12,7 +12,7 @@ public class TestNaver extends TestFactory {
 
     @Test
     public void testNaverHome() {
-        NaverHomePage naverHomePage = new NaverHomePage(this.driver);
+        NaverHomePage naverHomePage = new NaverHomePage(driver);
         System.out.println("print_for_testcase");
         Assert.assertTrue(naverHomePage.checkShortcutAreaIsVisible());
         searchKeyword = "이것은 셀레니움 테스트 코드 입니다.";
@@ -22,8 +22,8 @@ public class TestNaver extends TestFactory {
     @Test
     public void testNaverSearchResultPage() {
         System.out.println("print_for_testcase");
-        NaverSearchResultPage naverSearchResultPage = new NaverSearchResultPage(this.driver);
-        Assert.assertTrue(naverSearchResultPage.checkQueryArea(searchKeyword));
+        NaverSearchResultPage naverSearchResultPage = new NaverSearchResultPage(driver);
+        Assert.assertTrue(naverSearchResultPage.checkQueryArea("dsdsd"));
 
         usingSleep(1000);
 
