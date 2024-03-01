@@ -5,6 +5,9 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.remote.options.BaseOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,6 +16,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -21,8 +25,10 @@ import java.util.Properties;
 
 public class TestFactory {
 
-    protected WebDriver driver;
+    protected static WebDriver driver;
     protected String platform;
+
+
 
     /**
      * 파라미터를 커맨드라인으로부터 입력받아 초기화합니다.
@@ -44,24 +50,24 @@ public class TestFactory {
     @BeforeClass
     protected void setupDriver(){
         if ("pc_chrome".equals(this.platform)) {
-            this.driver = new ChromeDriver(this.setupChromeOptions());
+            driver = new ChromeDriver(this.setupChromeOptions());
 
         } else {
             try {
-                this.driver = new AppiumDriver(new URL("http://127.0.0.1:4723"), this.setupMobileOptions());
+                driver = new AppiumDriver(new URL("http://127.0.0.1:4723"), this.setupMobileOptions());
             } catch (MalformedURLException exception) {
                 exception.printStackTrace();
             }
         }
 
-        this.driver.get("https://www.naver.com");
+        driver.get("https://www.naver.com");
 
     }
 
     @AfterClass
     protected void tearDownDriver() {
-        this.driver.quit();
-        this.driver = null;
+        driver.quit();
+        driver = null;
     }
 
     public ChromeOptions setupChromeOptions() {
@@ -111,5 +117,18 @@ public class TestFactory {
             return null;
         }
 
+    }
+
+    public String getScreenshot(String scenarioName) {
+        try {
+            String captureName = scenarioName + ".jpg"; //이름 설정
+            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE); //스크린샷 촬영
+            FileUtils.copyFile(src, new File("file/screenshot/" + captureName)); //파일 배치
+            return  "file/screenshot/" + captureName;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

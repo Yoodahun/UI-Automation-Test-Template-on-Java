@@ -2,9 +2,12 @@
 
 <suite name="Web" verbose="1" >
     <parameter name="platform" value="pc_chrome"/>
+    <listeners>
+        <listener class-name="listeners.Listeners"/>
+    </listeners>
     <test name="NaverWeb">
-        <packages>
-            <package name="web.*"/>
-        </packages>
+        <classes>
+            <class name="web.TestNaver"/>
+        </classes>
     </test>
 </suite>

@@ -3,7 +3,6 @@
 <suite name="MobileWeb" verbose="1" >
     <parameter name="platform" value="aos_chrome"/>
     <test name="Naver_AndroidChrome">
-
         <packages>
             <package name="mobileWeb.*"/>
         </packages>
